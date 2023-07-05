@@ -8,11 +8,35 @@ type FormParams = {
 }
 
 const FormField = ({
-    type, title, state, placeholder, isTextArea, setState
+    type, 
+    title, 
+    state, 
+    placeholder, 
+    isTextArea, 
+    setState
 }: FormParams) => {
   return (
-    <div>
-        FormField
+    <div className="flexStart flex-col w-full gap-4">
+        <label className="w-full text-gray-100">
+          {title}
+        </label>
+        {isTextArea ? (
+        <textarea 
+        placeholder={placeholder}
+        value={state}
+        required
+        className="form_field-input"
+        onChange={(ev) => setState(ev.target.value)}
+        />
+        ) : (
+        <input 
+        type={type || "text"}
+        placeholder={placeholder}
+        value={state}
+        required
+        className="form_field-input"
+        onChange={(ev) => setState(ev.target.value)}
+        />)}
     </div>
   )
 }
