@@ -19,6 +19,7 @@ const ProjectActions = ({ projectId }: ProjectId) => {
         try {
             await deleteProject(projectId, token)
             router.push("/")
+            router.refresh()
         } catch (err: any) {
             console.log(err)
         } finally {

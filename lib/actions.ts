@@ -4,6 +4,7 @@ import {
     createUserMutation, 
     deleteProjectMutation, 
     getProjectByIdQuery, 
+    getUserProjectsQuery, 
     getUserQuery, 
     projectsQuery 
 } from "@/graphql"
@@ -29,7 +30,7 @@ export const getUser = (email: string) => {
 
 export const getUserProjects = (id: string, last?: number) => {
     client.setHeader("x-api-key", apiKey)
-    return makeGraphRequest(getProjectByIdQuery, { id, last })
+    return makeGraphRequest(getUserProjectsQuery, { id, last })
 }
 
 export const postUser = (name: string, email: string, avatarUrl: string) => {

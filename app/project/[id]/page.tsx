@@ -72,7 +72,7 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
                     rel="noreferrer"
                     className="flexCenter gap-2 text-sm font-medium text-primary-purple"
                     >
-                        <span className="underline">Github</span>
+                        🖥 <span className="underline">Github</span>
                     </Link>
                     <Image src="/dot.svg" width={4} height={4} alt="Dot" />
                     <Link
@@ -81,7 +81,7 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
                     rel="noreferrer"
                     className="flexCenter gap-2 text-sm font-medium text-primary-purple"
                     >
-                        <span className="underline">Live Site</span>
+                        🚀 <span className="underline">Live Site</span>
                     </Link>
                 </div>
             </section>

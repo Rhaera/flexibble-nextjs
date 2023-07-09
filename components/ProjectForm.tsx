@@ -28,12 +28,14 @@ const ProjectForm = ({ type, session }: FormProps) => {
   })
   const handleFormSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault()
+    if (!form.category) form.category = categoryFilters[0]
     setIsSubmitting(true)
     const { token } = await fetchToken()
     try {
       if (type === "create") {
         await createNewProject(form, session?.user?.id, token)
         router.push("/")
+        router.refresh()
       }
     } catch (err: any) {
       console.log(err)
@@ -105,7 +107,6 @@ const ProjectForm = ({ type, session }: FormProps) => {
       placeholder="https://github.com/your-account"
       setState={(value) => handleStateChange("githubUrl", value)}
       />
-      {/* CustomInput Category... */}
       <CustomMenu
       title="Category"
       state={form.category}
