@@ -14,6 +14,8 @@ const ProjectActions = ({ projectId }: ProjectId) => {
     const router = useRouter()
     const [isDeleting, setIsDeleting] = useState<boolean>(false)
     const handleDeleteProject = async () => {
+        const hasConfirmed = confirm("Are you sure about deleting this project?")
+        if (!hasConfirmed) return
         setIsDeleting(true)
         const { token } = await fetchToken()
         try {

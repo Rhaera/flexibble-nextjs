@@ -6,7 +6,8 @@ import {
     getProjectByIdQuery, 
     getUserProjectsQuery, 
     getUserQuery, 
-    projectsQuery 
+    projectsQuery, 
+    updateProjectMutation
 } from "@/graphql"
 import { GraphQLClient } from "graphql-request"
 
@@ -98,4 +99,23 @@ export const getProjectDetails = (id: string) => {
 export const deleteProject = (id: string, token: string) => {
     client.setHeader("Authorization", `Bearer ${token}`)
     return makeGraphRequest(deleteProjectMutation, { id })
+}
+
+export const updateProject = async (form: ProjectForm, projectId: string, token: string) => {
+    client.setHeader("Authorization", `Bearer ${token}`)
+    const encryptedRegex = /^data:image\/[a-z]+;base64,/
+    let updatedForm = { ...form }
+    if (encryptedRegex.test(form.image)) {
+        const imageUrl = await uploadImage(form.image)
+        if (imageUrl) {
+            updatedForm = {
+                ...form,
+                image: imageUrl.url
+            }
+        }
+    }
+    return makeGraphRequest(updateProjectMutation, {
+        id: projectId,
+        input: updatedForm
+    })
 }

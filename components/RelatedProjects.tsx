@@ -14,7 +14,7 @@ const RelatedProjects = async ({ userId, projectId }: RelatedParams) => {
                                     ?.projects
                                     ?.edges
                                     ?.filter(({ node }: { node: ProjectInterface }) => node?.id !== projectId)
-    if (filteredProjects?.length === 0) return
+    if ((result?.user?.id === "user_01H4DGVGJEGDX8QHBPS86F7H2A" && filteredProjects?.length === 2) || filteredProjects?.length === 0) return
     return (
         <section className="flex flex-col mt-32 w-full">
             <div className="flexBetween">
@@ -26,7 +26,9 @@ const RelatedProjects = async ({ userId, projectId }: RelatedParams) => {
                 </Link>
             </div>
             <div className="related_projects-grid">
-                {filteredProjects?.map(({ node }: { node: ProjectInterface }) => (
+                {filteredProjects?.filter(({ node }: { node: ProjectInterface }) => 
+                                        node?.id !== 'project_01H4XWJGEQ3KNH4SP3NCBZQ8V8' && node?.id !== 'project_01H4XZKSXDJPGRXJR9FT7PP0N5'
+                                        ).map(({ node }: { node: ProjectInterface }) => (
                     <div className="flexCenter related_project-card drop-shadow-card">
                         <Link href={`/project/${node?.id}`} className="flexCenter group relative w-full h-full">
                             <Image 
